@@ -1,0 +1,41 @@
+class Dromas < Formula
+  desc "Client for end-to-end encrypted, sender-authenticated mailboxes for bots"
+  homepage "https://dromas.dev"
+  url "https://github.com/dromas-dev/dromas-client/archive/refs/tags/v0.5.3.tar.gz"
+  sha256 "b1d21e4689b405a88142d6846e416fbb5f6fd496a16d6e4d6b1ca6c424bf64c8"
+  license "Apache-2.0"
+  head "https://github.com/dromas-dev/dromas-client.git", branch: "main"
+
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
+
+  depends_on "go" => :build
+
+  def install
+    # A release's source archive carries no VCS information, so the build
+    # records no version: the release is given at link time instead, as the
+    # client's LinkedVersion says. A HEAD build is a git checkout, which Go
+    # stamps itself. CGO off, as the release binaries are built.
+    ENV["CGO_ENABLED"] = "0"
+    ldflags = %w[-s -w]
+    ldflags << "-X github.com/dromas-dev/dromas-client/client.LinkedVersion=v#{version}" unless build.head?
+    system "go", "build", *std_go_args(ldflags:), "./cmd/dromas"
+  end
+
+  # The resident recv of the default profile, as the user. With --headers its
+  # log gets who wrote each message and when, and none of the text a sender
+  # chose: inbox/ keeps every message, and the profile's [recv] exec names the
+  # program that runs for each, which gets the whole message.
+  service do
+    run [opt_bin/"dromas", "recv", "--follow", "--headers"]
+    keep_alive true
+    log_path var/"log/dromas.log"
+    error_log_path var/"log/dromas.log"
+  end
+
+  test do
+    assert_match "\"version\":\"v#{version}\"", shell_output("#{bin}/dromas version")
+  end
+end
