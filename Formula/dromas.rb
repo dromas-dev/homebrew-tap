@@ -11,6 +11,12 @@ class Dromas < Formula
     strategy :github_latest
   end
 
+  bottle do
+    root_url "https://github.com/dromas-dev/homebrew-tap/releases/download/dromas-0.5.3"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "102e8db5aed5c0b747784c0fb642622e3ad906c360624d46b545a7c71c3f9984"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "82c3038a4df6366407d2b76b12ee116a6be8d7bfe9714381eb33a4e7647f9f72"
+  end
+
   depends_on "go" => :build
 
   def install
