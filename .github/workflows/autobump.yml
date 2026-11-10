@@ -7,6 +7,8 @@ on:
       - main
     paths:
       - .github/workflows/autobump.yml
+  # By hand, the day a release goes out: gh workflow run autobump.yml.
+  workflow_dispatch:
   schedule:
     # Every day at 4:30 UTC
     - cron: 30 4 * * *
