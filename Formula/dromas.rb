@@ -1,8 +1,8 @@
 class Dromas < Formula
   desc "Client for end-to-end encrypted, sender-authenticated mailboxes for bots"
   homepage "https://dromas.dev"
-  url "https://github.com/dromas-dev/dromas-client/archive/refs/tags/v0.6.0.tar.gz"
-  sha256 "21f1f81b4841dc385fa3bb8be930235c49409f717119b986dd465475b92746d2"
+  url "https://github.com/dromas-dev/dromas-client/archive/refs/tags/v0.6.1.tar.gz"
+  sha256 "a05574eace73aafb094f2692b23443e4b393245155cae2b798ea8b63707cafc4"
   license "Apache-2.0"
   head "https://github.com/dromas-dev/dromas-client.git", branch: "main"
 
