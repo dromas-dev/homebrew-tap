@@ -28,6 +28,10 @@ class Dromas < Formula
     ldflags = %w[-s -w]
     ldflags << "-X github.com/dromas-dev/dromas-client/client.LinkedVersion=v#{version}" unless build.head?
     system "go", "build", *std_go_args(ldflags:), "./cmd/dromas"
+    system bin/"dromas", "gen-docs", "--man-dir", buildpath/"man"
+    man1.install Dir[buildpath/"man/man1/*.1"]
+    man5.install buildpath/"man/man5/dromas.toml.5"
+    man7.install buildpath/"man/man7/dromas-output.7"
   end
 
   # The resident recv of the default profile, as the user. With --headers its
@@ -43,5 +47,6 @@ class Dromas < Formula
 
   test do
     assert_match "\"version\":\"v#{version}\"", shell_output("#{bin}/dromas version")
+    assert_path_exists man1/"dromas.1"
   end
 end
