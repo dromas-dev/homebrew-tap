@@ -12,9 +12,9 @@ class Dromas < Formula
   end
 
   bottle do
-    root_url "https://github.com/dromas-dev/homebrew-tap/releases/download/dromas-0.6.11"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "c0fae1e49307becc4216e119f48716d0695a7836fb4b1860338c4d568dcd32e5"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "2615a4a590126e21e2adf740d496879f099f6534d129ad5f3bf0d53fcd15d0cc"
+    root_url "https://github.com/dromas-dev/homebrew-tap/releases/download/dromas-0.6.12"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "9a24cede388d5174722a8e919fb4413dc7a8b869afe2b4300064e3de66bc79ba"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "dc1510e334e2b333b2e5fa214302bd44540653a84ca54df51e473261ad41fe39"
   end
 
   depends_on "go" => :build
